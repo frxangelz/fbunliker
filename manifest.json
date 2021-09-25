@@ -3,6 +3,10 @@
  "name": "Facebook UnLiker - FreeAngel",
  "description": "facebook unliker",
  "version": "1.0",
+ "browser_action": {
+    "default_title": "facebook unliker - FreeAngel",
+    "default_popup": "popup.html"
+ }, 
 "content_scripts": [
  {
  "matches": ["https://*.facebook.com/*"],

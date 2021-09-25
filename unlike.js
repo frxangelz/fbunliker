@@ -7,7 +7,7 @@
 /* you can edit this value ----------------------------------------------------- */
 const interval = 5000;
 const wait_delay = 5;
-const reload_after_unlike = 20;
+const reload_after_unlike = 40;
 const ignore_names =[
 						"Mak Lambe Turah",
 						"Japanese﻿﻿",
@@ -15,6 +15,7 @@ const ignore_names =[
 					];
 /* ----------------------------------------------------------------------------- */
 
+const _NO_SECTION_TIMEOUT = 120; // every 120 secs (two minutes) if no item found will reload the page
 cur_tick = 0;
 no_section = false;
 unlike_count = 0;
@@ -28,6 +29,7 @@ unlike_count = 0;
 		
 		DoJob();
 
+		console.log("Wait ...");
 	   }
 	}, interval);
 	
@@ -39,7 +41,7 @@ function DoJob(){
 	
 	if(no_section) { 
 	
-		if (cur_tick >= 30) { console.log("reloading page ..."); window.location.href = cur_url; }
+		if (cur_tick >= _NO_SECTION_TIMEOUT) { console.log("reloading page ..."); window.location.href = cur_url; }
 		return; 
 	}
 
@@ -60,6 +62,7 @@ function QuerySection(){
 	var img = null;
 	var uname = "";
 	var lastSection = null;
+	var found = 0;
 	
 	for(var i=0; i<section.length; i++){
 	
@@ -79,10 +82,11 @@ function QuerySection(){
 			continue;
 		}
 		
+		found++;
 		var hv = section[i].getElementsByTagName("div")[0];
 		hover(hv);
 		unlike_count++;
-		
+
 		setTimeout(function(){
 			UnLike();
 		}, 2000);
@@ -91,6 +95,8 @@ function QuerySection(){
 	}
 	
 	if(lastSection) { lastSection.scrollIntoView(); }
+	
+	if(found < 1) { no_section = true; }
 }
 
 function getUser(sec){
@@ -142,7 +148,7 @@ function UnLike(){
 	
 	setTimeout(function(){
 		pr.removeChild(ch);
-	},2000);
+	},1000);
 }
 
 function isIgnored(uname){
