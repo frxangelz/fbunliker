@@ -1,7 +1,7 @@
 /*
 	Simple script - facebook unliker
 	(c) FreeAngel - 2021
-	http://www.youtube.com/channel/UC15iFd0nlfG_tEBrt6Qz1NQ
+	https://www.youtube.com/channel/UCqRqvw9n7Lrh79x3dRDOkDg
 */
 
 /* you can edit this value ----------------------------------------------------- */
